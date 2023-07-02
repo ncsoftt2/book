@@ -1,0 +1,54 @@
+.single a {
+    text-decoration: none;
+    color: black;
+}
+
+.single_book {
+    width: 1000px;
+    margin:15px auto;
+    gap: 50px;
+    padding: 50px;
+    display: flex;
+    justify-content: space-between;
+    align-content: flex-start;
+    border: 1px solid rgba(0, 0, 0, 0.185);
+    border-radius: 9px;
+
+}
+
+.single_img img{
+    width: 300px;
+}
+
+.right_side{
+    width: 70%;
+}
+
+.title {
+    font-size: 22px;
+    color:rgb(66, 66, 66);
+}
+
+.desc{
+    display: flex;
+    margin-top: 15px;
+}
+
+.title_authors{
+    color:rgb(66, 66, 66);
+    font-weight: 700;
+    font-size: 18px;
+    margin-right: 7px;
+}
+
+.title_list{
+    font-size: 14px;
+    font-weight: 500;
+}
+
+.description{
+    color:rgb(66, 66, 66);
+    margin-top: 15px;
+    font-size: 13px;
+    padding: 0 30px;
+}

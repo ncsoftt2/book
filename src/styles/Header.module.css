@@ -1,0 +1,48 @@
+.header{
+    margin-top: 10px;
+    background: rgb(83, 67, 67);
+    padding: 15px;
+}
+.form {
+    text-align: center;
+}
+
+.input_name{
+    display:inline-block;
+    position: relative;
+    margin-bottom: 25px;
+}
+.input_name input{
+    width: 400px;
+}
+.input_name button{
+    cursor: pointer;
+    background-color: rgb(214, 214, 214);
+}
+.err_msg_name{
+    font-size: 14px;
+    display:inline-block;
+    color: white;
+    position: absolute;
+    bottom:-20px;
+}
+
+.select_input select {
+    cursor: pointer;
+    border:none;
+    outline: none;
+    padding: 5px;
+    font-size: 15px;
+    margin-right: 10px;
+}
+
+@media (max-width: 400px) {
+    .header{
+        width: 100%;
+        padding: 10px;
+    }
+    .input_name input{
+        width: 250px;
+    }
+    
+}
