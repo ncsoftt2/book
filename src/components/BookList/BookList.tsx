@@ -1,25 +1,25 @@
-import { useDispatch, useSelector } from "react-redux"
-import { useState, useEffect } from "react"
-import { searchBooks } from "../../slices/bookSlice"
+import React,{ useState, useEffect } from "react"
+import { List, searchBooks } from "../../slices/bookSlice"
 import Books from "./Books"
 import Spinner from '../Spinner/Spinner';
 import { saveOffset } from "../../slices/bookSlice";
+import { useAppDispatch, useAppSelector } from "../../hooks";
 
 const BookList = () => {
-    const {list,temp,isLoading,isError} = useSelector(({search}) => search)
-    const [newItemLoading,setNewItemLoading] = useState(false)
-    const [books,setBooks] = useState([])
+    const {list,temp,isLoading,isError} = useAppSelector(({search}) => search)
+    const [books,setBooks] = useState<List[]>([])
     useEffect(() => {
         setBooks(list)
     },[list])
-    const dispatch = useDispatch();
+
+    const dispatch = useAppDispatch()
     const onRequest = () => {
-        dispatch(searchBooks(`q=${temp.name}${temp.category ? "+" +temp.category : ''}&startIndex=${temp.offset + 10}&maxResults=10&orderBy=${temp.sort}`))
+        dispatch(searchBooks(`q=${temp.name}${temp.category ? "+" +temp.category : ''}&startIndex=${temp.offset}&maxResults=10&orderBy=${temp.sort}`))
             .then(onBookLoaded)
-        dispatch(saveOffset(temp.offset + 10))
+            dispatch(saveOffset(temp.offset + 10))
     }
-    const onBookLoaded = (newBookList) => {
-        setBooks([...books,...newBookList.payload])
+    const onBookLoaded = () => {
+        setBooks((items) => [...books,...items])
     }
     const spinner = isLoading ? <Spinner/> : null
     const error = isError ? <div style={{textAlign:'center',marginTop: '40px'}}>Error...</div> : null

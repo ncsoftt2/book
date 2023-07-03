@@ -2,34 +2,70 @@ import { createAsyncThunk, createSlice } from "@reduxjs/toolkit";
 import axios from "axios";
 import {API_KEY, BASE_URL} from '../utils/constans';
 
-export const searchBooks = createAsyncThunk(
+export const searchBooks = createAsyncThunk<List[],string | number>(
     'search/searchBooks',
     async (payload) => {
         const res = await axios(`${BASE_URL}?${payload}&apiKey=${API_KEY}`)
         return res.data.items
     }
 )
-export const singleBook = createAsyncThunk(
+export const singleBook = createAsyncThunk<Single,string>(
     'search/singleBook',
-    async (payload) => {
+    async (payload: string) => {
         const res = await axios(`${BASE_URL}/${payload}`)
         return res.data.volumeInfo
     }
 )
+
+export interface List {
+    id: string
+    volumeInfo: {
+        title: string
+        categories: string[]
+        imageLinks: {
+            thumbnail: string
+        }
+    }
+}
+interface Single {
+    imageLinks: {
+        thumbnail: string
+    }
+    title: string
+    authors: string[]
+    categories: string[]
+    description: string
+}
+
+interface InitialState {
+    list: List[],
+    single: Single | null,
+    temp: {
+        name: string,
+        category: string,
+        sort:  string,
+        offset:  number
+    },
+    isLoading: boolean,
+    isError: boolean
+}
+
+const initialState: InitialState = {
+    list: [] as List[],
+    single: null as Single | null,
+    temp: {
+        name: '',
+        category: '',
+        sort:  '',
+        offset: 0
+    },
+    isLoading: false,
+    isError: false
+}
+
 const bookSlice = createSlice({
     name: 'search',
-    initialState: {
-        list: [],
-        single: null,
-        temp: {
-            name: [],
-            category: [],
-            sort: [],
-            offset: []
-        },
-        isLoading: false,
-        isError: false
-    },
+    initialState,
     reducers: {
         saveName: (state, {payload}) => {
             state.temp.name = payload

@@ -1,7 +1,16 @@
+import React from "react";
 import { Link } from "react-router-dom";
+import { List } from "../../slices/bookSlice";
 import styles from '../../styles/Books.module.css';
 
-const Books = ({books,onRequest,name,offset}) => {
+type PropsType = {
+    books: List[],
+    onRequest: () => void,
+    name: string
+    offset: number
+}
+
+const Books: React.FC<PropsType> = ({books,onRequest,name,offset}) => {
     return (
         <section className={styles.book_list}>
             <div className={styles.list}>
@@ -29,7 +38,7 @@ const Books = ({books,onRequest,name,offset}) => {
             <div className={styles.btnOrText}>
             {
             books.length > 0 
-                ? <button onClick={() => onRequest(name,offset)} className={styles.btn_load}>load more</button> 
+                ? <button onClick={() => onRequest()} className={styles.btn_load}>load more</button> 
                 : null
                 }
             </div>

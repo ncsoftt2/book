@@ -1,14 +1,14 @@
-import { useEffect } from "react";
-import { useDispatch, useSelector } from "react-redux";
+import React,{ useEffect } from "react";
 import { useParams, Link } from "react-router-dom";
-import { saveOffset, singleBook } from "../../slices/bookSlice";
+import { singleBook } from "../../slices/bookSlice";
 import Spinner from '../Spinner/Spinner';
 import {ROUTES} from '../../utils/routes';
 import styles from '../../styles/Single.module.css';
+import { useAppDispatch, useAppSelector } from "../../hooks";
 
 const SingleBook = () => {
-    const {single,isLoading} = useSelector(({search}) => search)
-    const dispatch = useDispatch()
+    const {single,isLoading} = useAppSelector(({search}) => search)
+    const dispatch = useAppDispatch()
 
     const {id} = useParams()
     useEffect(() =>{

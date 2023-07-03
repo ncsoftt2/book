@@ -1,4 +1,4 @@
-import {useState} from "react";
+import React from "react";
 import Header from "../Header/Header";
 import AppRoutes from "../AppRoutes/AppRoutes";
 
@@ -12,4 +12,4 @@ const App = () => {
         </div>
     )
 }
-export default App
+export default App;

@@ -1,13 +1,13 @@
-import { useDispatch } from "react-redux"
 import { saveCategory, saveName, saveOffset, saveSort, searchBooks } from "../../slices/bookSlice"
 import { Formik, Field,Form, ErrorMessage} from "formik"
 import * as Yup from 'yup';
 import styles from '../../styles/Header.module.css';
 import { useNavigate } from "react-router-dom";
 import {ROUTES} from '../../utils/routes';
+import { useAppDispatch } from "../../hooks";
 
 const Header = () => {
-    const dispatch = useDispatch()
+    const dispatch = useAppDispatch()
     const navigate = useNavigate();
     return (
         <header className={styles.header}>
@@ -24,11 +24,12 @@ const Header = () => {
                 onSubmit={(value) => {
                     navigate(ROUTES.HOME)
                     if(value.name.trim().length === 0) return;
-                    dispatch(searchBooks(`q=${value.name}${value.category ? "+" +value.category : ''}&startIndex=0&maxResults=10&orderBy=${value.sort}`))
+                    dispatch(searchBooks(`q=${value.name}${value.category ? "+" +value.category : ''}&startIndex=${value.offset}&maxResults=10&orderBy=${value.sort}`))
                     dispatch(saveName(value.name))
                     dispatch(saveCategory(value.category))
-                    dispatch(saveOffset(value.offset))
+                    dispatch(saveOffset(value.offset + 10))
                     dispatch(saveSort(value.sort))
+                    console.log('fetch')
                 }}
             >
                 <Form className={styles.form}>
@@ -40,9 +41,9 @@ const Header = () => {
                     <div className={styles.select_input}>
                         <Field id='category' name='category' as="select">
                             <option value=''>Выбрать категорию</option>
-                            <option value={`subject:art`}>Арт</option>
-                            <option value={`subject:computers`}>Компьютеры</option>
-                            <option value={`subject:medicine`}>Медицина</option>
+                            <option value={`subject:art`}>Art</option>
+                            <option value={`subject:computers`}>Computers</option>
+                            <option value={`subject:medicine`}>Medicine</option>
                         </Field>
                         <Field id='sort' name='sort' as="select" >
                             <option value={'relevance'}>Relevance</option>
