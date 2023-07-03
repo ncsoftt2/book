@@ -40,9 +40,9 @@ const Header = () => {
                     <div className={styles.select_input}>
                         <Field id='category' name='category' as="select">
                             <option value=''>Выбрать категорию</option>
-                            <option value={`subject:art`}>Арт</option>
-                            <option value={`subject:computers`}>Компьютеры</option>
-                            <option value={`subject:medicine`}>Медицина</option>
+                            <option value={`subject:art`}>Art</option>
+                            <option value={`subject:computers`}>Computers</option>
+                            <option value={`subject:medicine`}>Medicine</option>
                         </Field>
                         <Field id='sort' name='sort' as="select" >
                             <option value={'relevance'}>Relevance</option>
