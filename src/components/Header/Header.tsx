@@ -29,7 +29,6 @@ const Header = () => {
                     dispatch(saveCategory(value.category))
                     dispatch(saveOffset(value.offset + 10))
                     dispatch(saveSort(value.sort))
-                    console.log('fetch')
                 }}
             >
                 <Form className={styles.form}>
