@@ -8,9 +8,10 @@ type PropsType = {
     onRequest: () => void,
     name: string
     offset: number
+    isEnd: boolean
 }
 
-const Books: React.FC<PropsType> = ({books,onRequest,name,offset}) => {
+const Books: React.FC<PropsType> = ({books,onRequest,isEnd}) => {
     return (
         <section className={styles.book_list}>
             <div className={styles.list}>
@@ -36,11 +37,7 @@ const Books: React.FC<PropsType> = ({books,onRequest,name,offset}) => {
                 ))}
             </div>
             <div className={styles.btnOrText}>
-            {
-            books.length > 0 
-                ? <button onClick={() => onRequest()} className={styles.btn_load}>load more</button> 
-                : null
-                }
+                {!isEnd && <button onClick={() => onRequest()} className={styles.btn_load}>load more</button>}
             </div>
         </section>
     )
