@@ -15,7 +15,6 @@ const SingleBook = () => {
         if(!id) return
         dispatch(singleBook(id))
     },[id])
-    console.log(single)
     return (
         <section className={styles.single}>
             {isLoading ? <Spinner/> : !single ? null : (
