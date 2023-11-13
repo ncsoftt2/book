@@ -9,9 +9,10 @@ type PropsType = {
     name: string
     offset: number
     isEnd: boolean
+    loading: boolean
 }
 
-const Books: React.FC<PropsType> = ({books,onRequest,isEnd}) => {
+const Books: React.FC<PropsType> = ({books,onRequest,isEnd,loading}) => {
     return (
         <section className={styles.book_list}>
             <div className={styles.list}>
@@ -37,7 +38,7 @@ const Books: React.FC<PropsType> = ({books,onRequest,isEnd}) => {
                 ))}
             </div>
             <div className={styles.btnOrText}>
-                {!isEnd && <button onClick={() => onRequest()} className={styles.btn_load}>load more</button>}
+                {!isEnd && !loading && <button onClick={() => onRequest()} className={styles.btn_load}>load more</button>}
             </div>
         </section>
     )

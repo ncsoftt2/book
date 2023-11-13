@@ -6,6 +6,7 @@ import { saveOffset } from "../../slices/bookSlice";
 import { useAppDispatch, useAppSelector } from "../../hooks";
 
 const BookList = () => {
+    const [loading,setLoading] = useState(false)
     const {list,temp,isLoading,isError} = useAppSelector(({search}) => search)
     const [books,setBooks] = useState<List[]>([])
     const [isEnd,setEnd] = useState(false);
@@ -15,19 +16,26 @@ const BookList = () => {
 
     const dispatch = useAppDispatch()
     const onRequest = () => {
+        setLoading(true)
         if(list.length < 10) return setEnd(true);
         dispatch(searchBooks(`q=${temp.name}${temp.category ? "+" +temp.category : ''}&startIndex=${temp.offset}&maxResults=10&orderBy=${temp.sort}`))
-            .then(onBookLoaded)
+            .then(() => {
+                onBookLoaded()
+                setLoading(false)
+            })
             dispatch(saveOffset(temp.offset + 10))
+
     }
     const onBookLoaded = () => {
+        setLoading(true)
         setBooks((items) => [...books,...items])
+        setLoading(false)
     }
     const spinner = isLoading ? <Spinner/> : null
     const error = isError ? <div style={{textAlign:'center',marginTop: '40px'}}>Error...</div> : null
     const content = !books.length && !isError && !isLoading
                         ? <div style={{textAlign:'center',marginTop: '40px'}}>empty</div> 
-                        : <Books books={books} onRequest={onRequest} name={temp.name} offset={temp.offset} isEnd={isEnd}/>
+                        : <Books books={books} loading={loading} onRequest={onRequest} name={temp.name} offset={temp.offset} isEnd={isEnd}/>
     return (
             <> 
                 {error}
