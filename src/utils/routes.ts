@@ -1,4 +1,4 @@
 export const ROUTES = {
-    HOME: '/',
+    HOME: '/book',
     SINGLE_BOOK: '/book/:id'
 }
